@@ -13,8 +13,8 @@ export default function PdfToImg() {
 
   useEffect(() => {
     import('pdfjs-dist').then(pdfjsLib => {
-      pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
-    });
+      pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
+    }).catch(console.error);
   }, []);
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,6 +31,8 @@ export default function PdfToImg() {
 
     try {
       const pdfjsLib = await import('pdfjs-dist');
+      pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
+      
       const arrayBuffer = await file.arrayBuffer();
       const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
       const numPages = pdf.numPages;
@@ -57,9 +59,9 @@ export default function PdfToImg() {
       }
       
       setImages(generatedImages);
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
-      setError('Failed to extract images from PDF.');
+      setError(`Failed to extract images from PDF: ${err.message || 'Unknown error'}`);
     } finally {
       setIsProcessing(false);
     }

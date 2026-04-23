@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     type: 'website',
   },
   verification: {
-    google: 'VZb4Chi3H9sF_-j4uEHf-da-wPTIibgeqcOQMf2o8fY',
+    google: 'YgxbK7eQrW4WLAE5zd1fS1vnQqcRXfxx8gy3qo_S-0E',
   },
 };
 
@@ -22,6 +22,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en">
       <head>
+        <meta name="google-site-verification" content="YgxbK7eQrW4WLAE5zd1fS1vnQqcRXfxx8gy3qo_S-0E" />
         {/* Google AdSense */}
         <Script
           async

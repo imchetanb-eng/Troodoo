@@ -20,9 +20,9 @@ export default function OrganizePdf() {
 
   useEffect(() => {
     import('pdfjs-dist').then(pdfjsLib => {
-      pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
+      pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
       setPdfjsLibState(pdfjsLib);
-    });
+    }).catch(console.error);
   }, []);
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -13,6 +13,9 @@ export const metadata: Metadata = {
     siteName: 'Troodoo',
     type: 'website',
   },
+  verification: {
+    google: 'VZb4Chi3H9sF_-j4uEHf-da-wPTIibgeqcOQMf2o8fY',
+  },
 };
 
 export default function RootLayout({children}: {children: React.ReactNode}) {

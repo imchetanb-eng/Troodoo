@@ -1,0 +1,6 @@
+{
+  "name": "ClearMark",
+  "description": "An application to remove watermarks from images and videos",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

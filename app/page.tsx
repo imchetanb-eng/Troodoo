@@ -194,6 +194,52 @@ export default function Dashboard() {
             </Link>
           ))}
         </motion.div>
+
+        {/* Publisher Content / SEO Section */}
+        <div className="w-full mt-24 text-gray-600 prose prose-indigo max-w-none">
+          <hr className="mb-12 border-gray-200" />
+          <h2 className="text-3xl font-bold text-gray-900 mb-6">Free, Unlimited Document & Media Tools</h2>
+          <p className="mb-6">
+            Welcome to Troodoo Studio, your reliable online platform for handling everyday digital tasks without limits, paywalls, or privacy concerns. Whether you are a student, professional, or casual user, dealing with media files and PDF documents can often be a hassle when you are forced to download expensive software or create an account for a one-time task.
+          </p>
+          <p className="mb-6">
+            We provide a comprehensive suite of utilities that run entirely in your web browser. This means your files are processed locally when possible, and your privacy is always our top priority. We do not store your documents, images, or media files on our servers longer than necessary to process your request.
+          </p>
+          
+          <h3 className="text-2xl font-bold text-gray-900 mb-4 mt-8">Why Use Troodoo Studio?</h3>
+          <ul className="list-disc pl-6 space-y-3 mb-6">
+            <li><strong>100% Free Forever:</strong> We believe that fundamental document editing and media conversion tools should be accessible to everyone without subscriptions or hidden fees.</li>
+            <li><strong>No Sign-up Required:</strong> Time is valuable. You don't need an account, an email address, or a password to use any of our features. Just select a tool, upload your file, and get your results instantly.</li>
+            <li><strong>Privacy First:</strong> Your files belong to you. Many of our tools utilize client-side technologies such as WebAssembly to keep your data securely on your device. When server processing is required, files are automatically deleted after processing.</li>
+            <li><strong>Cross-Platform Compatibility:</strong> Since Troodoo operates entirely online, you can use our tools on Windows, macOS, Linux, Android, and iOS devices. All you need is a modern web browser.</li>
+          </ul>
+
+          <h3 className="text-2xl font-bold text-gray-900 mb-4 mt-8">Our Toolkit Features</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
+            <div>
+              <h4 className="text-lg font-bold text-gray-900 mb-2">PDF Editing & Organization</h4>
+              <p>
+                PDFs are the standard format for document sharing, but they are notoriously difficult to edit. With our PDF tools, you can easily <strong>Merge PDFs</strong> to combine multiple documents into a single file, <strong>Split PDFs</strong> to extract specific pages, or <strong>Organize PDFs</strong> with our intuitive drag-and-drop interface to delete and reorder pages effortlessly. We also provide secure tools to <strong>Unlock PDFs</strong> and remove annoying passwords from files you own.
+              </p>
+            </div>
+            <div>
+              <h4 className="text-lg font-bold text-gray-900 mb-2">Media Conversion & Optimization</h4>
+              <p>
+                Working with images often requires changing formats or reducing file sizes to meet upload limits. Use our <strong>Image Compressor</strong> to drastically reduce the size of your JPEG and PNG files without sacrificing quality. Need to convert the modern WebP format for older software? Our <strong>WebP to JPG/PNG</strong> tool handles it seamlessly. Furthermore, our <strong>PDF to Image</strong> and <strong>Image to PDF</strong> converters make it simple to switch between document and image formats.
+              </p>
+            </div>
+            <div>
+              <h4 className="text-lg font-bold text-gray-900 mb-2">Advanced Utilities</h4>
+              <p>
+                Sometimes you need to pull the raw text from a document or add a custom watermark for security. Our <strong>Extract Text</strong> tool uses PDF parsing to grab the text content from documents, while the <strong>Watermark PDF</strong> and media tools allow you to appropriately brand your assets. Need a quick barcode? The <strong>QR Code Generator</strong> provides clean, downloadable codes instantly.
+              </p>
+            </div>
+          </div>
+          
+          <p className="mt-8 text-sm text-gray-500 border-t border-gray-200 pt-8 pb-4 text-center">
+            Start using our free online toolkit today. No installation, no registration, no hassle. Troodoo Studio is committed to saving you time and money.
+          </p>
+        </div>
       </main>
     </div>
   );

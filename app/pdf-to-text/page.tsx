@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { Type, Download, ArrowLeft, Loader2, File } from 'lucide-react';
+import { setupPdfWorker } from '../lib/pdfjs-setup';
 
 export default function PdfToText() {
   const [file, setFile] = useState<File | null>(null);
@@ -25,8 +26,8 @@ export default function PdfToText() {
   const extractText = async (pdfFile: File) => {
     setIsProcessing(true);
     try {
-      const pdfjsLib = await import('pdfjs-dist');
-      pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
+      const pdfjsLib = await setupPdfWorker();
+      if (!pdfjsLib) throw new Error("PDF.js failed to load.");
 
       const arrayBuffer = await pdfFile.arrayBuffer();
       const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
@@ -117,6 +118,44 @@ export default function PdfToText() {
             />
           </div>
         )}
+
+        {/* Publisher Content / Info Section */}
+        <div className="w-full mt-24 text-gray-600 prose prose-yellow max-w-none border-t border-gray-200 pt-12 text-left">
+          <h2 className="text-3xl font-bold text-gray-900 mb-6">Easily Extract Text from PDF Documents</h2>
+          <p className="mb-4">
+            A PDF (Portable Document Format) is primarily designed to lock down a document's layout so it looks the same on any device. While excellent for viewing or printing, PDFs are notoriously frustrating when you need to copy out data or edit the writing. Our <strong>PDF to Text</strong> tool breaks through that barrier by parsing the underlying document structure and extracting all recognizable text into a clean, plain text file format (.txt).
+          </p>
+
+          <h3 className="text-2xl font-bold text-gray-900 mb-4 mt-8">Common Use Cases</h3>
+          <ul className="list-disc pl-6 space-y-3 mb-6">
+            <li><strong>Repurposing Content:</strong> Easily copy and paste large sections of text from reports, manuals, and eBooks into word processors like Microsoft Word or Google Docs without dealing with weird formatting issues.</li>
+            <li><strong>Data Analysis:</strong> Extract table data or financial information from PDF invoices to analyze later in Excel or custom software.</li>
+            <li><strong>Accessibility:</strong> Plain text is much easier to feed into screen readers and translation tools compared to standard PDF files.</li>
+          </ul>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-8">
+            <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+              <h4 className="text-xl font-bold text-gray-900 mb-2">How it works</h4>
+              <p className="text-gray-600">
+                1. Upload your PDF document.<br/>
+                2. Our text-extraction engine scans the document, ignoring images and styling.<br/>
+                3. We present the raw text in an editable preview window.<br/>
+                4. You can edit the text directly or download it as a `.txt` file.
+              </p>
+            </div>
+            <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+              <h4 className="text-xl font-bold text-gray-900 mb-2">Privacy focused</h4>
+              <p className="text-gray-600">
+                Your PDF contains your data. Our tool processes the text extraction directly on your own device within the browser sandbox. We do not transmit your confidential documents or their extracted text contents to remote servers.
+              </p>
+            </div>
+          </div>
+          
+          <h4 className="text-lg font-bold text-gray-900 mb-2 mt-6">A note about scanned PDFs</h4>
+          <p className="mb-8">
+            This tool excels at extracting text from natively generated PDFs (documents saved as PDFs from Word, Google Docs, etc.). However, if your PDF is a scanned image of a piece of paper, the "text" is technically an image. In those cases, you would need an Optical Character Recognition (OCR) tool to read the text. Currently, our extractor relies on the internal text map of the PDF.
+          </p>
+        </div>
       </main>
     </div>
   );

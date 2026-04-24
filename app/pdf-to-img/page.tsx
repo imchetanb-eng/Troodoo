@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { FileText, Download, ArrowLeft, Loader2 } from 'lucide-react';
-import { motion } from 'motion/react';
+import { setupPdfWorker } from '../lib/pdfjs-setup';
 
 export default function PdfToImg() {
   const [pdfFile, setPdfFile] = useState<File | null>(null);
@@ -12,9 +12,7 @@ export default function PdfToImg() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    import('pdfjs-dist').then(pdfjsLib => {
-      pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
-    }).catch(console.error);
+    setupPdfWorker();
   }, []);
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,8 +28,8 @@ export default function PdfToImg() {
     setIsProcessing(true);
 
     try {
-      const pdfjsLib = await import('pdfjs-dist');
-      pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
+      const pdfjsLib = await setupPdfWorker();
+      if (!pdfjsLib) throw new Error("PDF.js failed to load.");
       
       const arrayBuffer = await file.arrayBuffer();
       const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
@@ -134,6 +132,36 @@ export default function PdfToImg() {
             </div>
           </div>
         )}
+
+        {/* Publisher Content / Info Section */}
+        <div className="w-full mt-24 text-gray-600 prose prose-blue max-w-none border-t border-gray-200 pt-12 text-left">
+          <h2 className="text-3xl font-bold text-gray-900 mb-6">Convert PDF to Image Seamlessly</h2>
+          <p className="mb-4">
+            Sometimes you need to share a specific page of a PDF document, embed it in an email, or use it in a presentation where PDF files aren't supported. Our <strong>PDF to Image</strong> tool solves this by extracting every individual page of your document and converting it into a high-quality PNG image file.
+          </p>
+
+          <h3 className="text-2xl font-bold text-gray-900 mb-4 mt-8">Why Convert PDFs to Images?</h3>
+          <ul className="list-disc pl-6 space-y-3 mb-6">
+            <li><strong>Social Media Sharing:</strong> Platforms like Twitter, Instagram, and Facebook do not support PDF uploads. Converting your document into images allows you to share flyers, announcements, and infographics easily.</li>
+            <li><strong>Web Compatibility:</strong> If you are building a website, images load faster and are universally supported across all browsers without requiring a dedicated PDF viewer plugins.</li>
+            <li><strong>Presentations:</strong> Easily drop PDF pages as images into PowerPoint, Google Slides, or Keynote.</li>
+            <li><strong>Security:</strong> By sharing a flattened image rather than the original PDF, you prevent others from easily copying the text data or analyzing metadata.</li>
+          </ul>
+
+          <div className="my-8 bg-blue-50 border border-blue-100 rounded-xl p-6">
+            <h4 className="text-lg font-bold text-gray-900 mb-2">100% Private, Local Processing</h4>
+            <p className="text-sm">
+              We respect your privacy. Unlike many online tools that upload your sensitive documents to a remote server for processing, Troodoo Studio utilizes modern browser capabilities (WebAssembly) to extract the images directly on your own device. Your files never leave your computer, ensuring absolute confidentiality.
+            </p>
+          </div>
+
+          <h4 className="text-lg font-bold text-gray-900 mb-2 mt-6">How to use it</h4>
+          <ol className="list-decimal pl-6 space-y-2 mb-8">
+            <li>Click the upload box to select your target PDF document.</li>
+            <li>Wait a few seconds while your browser renders the images.</li>
+            <li>A gallery of thumbnails will securely appear. Click the <strong>Download Page [X]</strong> button below any thumbnail to save it directly to your device as a PNG file.</li>
+          </ol>
+        </div>
       </main>
     </div>
   );

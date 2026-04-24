@@ -3,14 +3,22 @@ import Script from 'next/script';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Troodoo | Free Online PDF & Media Tools',
-  description: 'Troodoo offers free, fast, and secure in-browser tools to merge, split, compress, organize PDFs, and convert images instantly without server limits.',
-  keywords: ['PDF tools', 'image compressor', 'watermark remover', 'Troodoo', 'free PDF merge', 'WebP to JPG'],
+  metadataBase: new URL('https://troodoo.com'),
+  title: {
+    default: 'Troodoo Studio | Free Online PDF & Media Tools',
+    template: '%s | Troodoo Studio',
+  },
+  description: 'Troodoo offers free, fast, and secure in-browser tools to merge, split, compress, organize PDFs, extract text, and convert images instantly without uploading to servers.',
+  keywords: [
+    'PDF tools', 'image compressor', 'organize PDF', 'Troodoo', 'free PDF tools', 
+    'WebP converter', 'PDF to Image', 'Image to PDF', 'Split PDF', 'Merge PDF', 
+    'Troodoo Studio', 'PDF extractor', 'Unlock PDF'
+  ],
   openGraph: {
-    title: 'Troodoo | Free Online PDF & Media Tools',
+    title: 'Troodoo Studio | Free Online PDF & Media Tools',
     description: 'Free, fast, and secure in-browser tools to merge, split, compress, and organize PDFs and images.',
     url: 'https://troodoo.com',
-    siteName: 'Troodoo',
+    siteName: 'Troodoo Studio',
     type: 'website',
   },
   verification: {
